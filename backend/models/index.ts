@@ -1,3 +1,3 @@
-import TilModel from "./til-model"
+import TILModel from "./til-model"
 
-export { TilModel }
+export { TILModel }
