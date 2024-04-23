@@ -19,11 +19,11 @@ app.use((req, res, next) => {
 })
 
 app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
-  if (res.headersSent) {
-    return next(error)
-  }
-
+  if (res.headersSent) return next(error)
   res.status(error.code || 500).json({ message: error.message || "An unknown error occurred!" })
 })
 
-mongoose.connect(MONGODB_URI).then(() => app.listen(PORT, () => console.log(`listening at PORT ${PORT}`)))
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => app.listen(PORT, () => console.log(`listening at PORT ${PORT}`)))
+  .catch((error) => console.log(error))
